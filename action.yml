@@ -1,0 +1,50 @@
+# action.yml
+name: "Create Packet Device"
+description: "Create a new device within a project on Packet.com"
+author: mattdavis0351
+
+inputs:
+  API_key: # API key set under "Personal Settings on Packet.com"
+    description: "Packet.com API authorization token"
+    required: true
+    default: "No key supplied"
+  project_name:
+    description: "Name of project to create device in"
+    required: true
+    default: "default"
+  host_names:
+    description: "Desired host name for new device"
+    required: true
+    default: "GitHub Actions Host"
+  plan:
+    description: "Desired server type for device"
+    required: true
+    default: "default"
+  facility:
+    description: "Geographical location for device"
+    required: true
+    default: "default"
+  operating_system:
+    description: "Desired operating system for device"
+    required: true
+    default: "default"
+  user_ssh_keys:
+    description: "SSH keys for any user account you wish to add to device"
+    required: false
+  project_ssh_keys:
+    description: "Project level SSH keys for device"
+    required: false
+
+outputs:
+  ip_addresses:
+    description: "IP addresses of newly created device"
+  device_id:
+    description: "ID of the newly created device"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "cloud"
+  color: "gray-dark"
