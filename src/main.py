@@ -2,14 +2,18 @@ import packet
 import os
 
 # Collect input variables from workflow
-API_key = os.getenv("INPUT_API_KEY")
+API_key = os.getenv("INPUT_API_KEY") or "No key supplied"
 host_name = os.getenv("INPUT_HOST_NAME")
-project_name = os.getenv("INPUT_PROJECT_NAME")
-plan = os.getenv("INPUT_PLAN")
-facility = os.getenv("INPUT_FACILITY")
-operating_system = os.getenv("INPUT_OPERATING_SYSTEM")
+project_name = os.getenv("INPUT_PROJECT_NAME") or "default"
+plan = os.getenv("INPUT_PLAN") or "default"
+facility = os.getenv("INPUT_FACILITY") or "default"
+operating_system = os.getenv("INPUT_OPERATING_SYSTEM") or "default"
 user_ssh_keys = os.getenv("INPUT_USER_SSH_KEYS") or []
 project_ssh_keys = os.getenv("INPUT_PROJECT_SSH_KEYS") or []
+batch_quantity = os.getenv("INPUT_QUANTITY") or 1
+spot_instance = os.getenv("INPUT_SPOT_INSTANCE") or False
+spot_price_max = os.getenv("INPUT_SPOT_PRICE_MAX") or 1
+
 
 # Check if required inputs have been received
 if API_key == "No key supplied":
@@ -49,17 +53,26 @@ for p in projects:
         raise ValueError(
             "Supplied project name does not match any valid projects for this API key")
 
-# Create a device with desired parameters matching top-level vars
+# Parse hostnames
+name_arr = host_name.split(',')
+hostnames = []
+for name in name_arr:
+    hostnames.append(name.strip().replace(' ', '-'))
 
-device = manager.create_device(project_id=project_id, hostname=host_name,
-                               plan=plan,
-                               facility=facility,
-                               operating_system=operating_system,
-                               user_ssh_keys=user_ssh_keys,
-                               project_ssh_keys=project_ssh_keys)
-
-# Set outputs for action
-print(f"::set-output name=device_id::{device.id}")
-print(f"::set-output name=ip_addresses::{device.ip_addresses}")
+# Create a device batch with desired parameters matching top-level vars
+params = [
+    {
+        "hostnames": hostnames,
+        "facility": facility,
+        "plan": plan,
+        "operating_system": operating_system,
+        "quantity": batch_quantity,
+        "user_ssh_keys": user_ssh_keys,
+        "project_ssh_keys": project_ssh_keys,
+        "spot_instance": spot_instance,
+        "spot_price_max": spot_price_max
+    }
+]
+batch = manager.create_batch(project_id=project_id, params=params)
 
 # Profit

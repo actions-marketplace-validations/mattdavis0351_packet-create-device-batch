@@ -7,32 +7,41 @@ inputs:
   API_key: # API key set under "Personal Settings on Packet.com"
     description: "Packet.com API authorization token"
     required: true
-    default: "No key supplied"
+    # default: "No key supplied"
   project_name:
     description: "Name of project to create device in"
     required: true
-    default: "default"
+    # default: "default"
   host_names:
-    description: "Desired host name for new device"
+    description: "Comma separated list of desired host name for new device"
     required: true
     default: "GitHub Actions Host"
   plan:
     description: "Desired server type for device"
     required: true
-    default: "default"
+    # default: "default"
   facility:
     description: "Geographical location for device"
     required: true
-    default: "default"
+    # default: "default"
   operating_system:
     description: "Desired operating system for device"
     required: true
-    default: "default"
+    # default: "default"
+  quantity:
+    description: "Number of desired devices in batch"
+    required: false
   user_ssh_keys:
     description: "SSH keys for any user account you wish to add to device"
     required: false
   project_ssh_keys:
     description: "Project level SSH keys for device"
+    required: false
+  spot_instance:
+    description: "Create devices as spot instances"
+    required: false
+  spot_price_max:
+    description: "Maximum bid for spot instances"
     required: false
 
 outputs:
