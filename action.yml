@@ -44,11 +44,11 @@ inputs:
     description: "Maximum bid for spot instances"
     required: false
 
-outputs:
-  ip_addresses:
-    description: "IP addresses of newly created device"
-  device_id:
-    description: "ID of the newly created device"
+# outputs:
+#   ip_addresses:
+#     description: "IP addresses of newly created device"
+#   device_id:
+#     description: "ID of the newly created device"
 
 runs:
   using: "docker"
