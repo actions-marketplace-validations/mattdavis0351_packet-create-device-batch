@@ -10,9 +10,9 @@ facility = os.getenv("INPUT_FACILITY") or "default"
 operating_system = os.getenv("INPUT_OPERATING_SYSTEM") or "default"
 user_ssh_keys = os.getenv("INPUT_USER_SSH_KEYS") or []
 project_ssh_keys = os.getenv("INPUT_PROJECT_SSH_KEYS") or []
-batch_quantity = os.getenv("INPUT_QUANTITY") or 1
+batch_quantity = int(os.getenv("INPUT_QUANTITY")) or 1
 spot_instance = os.getenv("INPUT_SPOT_INSTANCE") or False
-spot_price_max = os.getenv("INPUT_SPOT_PRICE_MAX") or 1
+spot_price_max = float(os.getenv("INPUT_SPOT_PRICE_MAX")) or 1
 
 
 # Check if required inputs have been received
