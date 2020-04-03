@@ -3,7 +3,7 @@ import os
 
 # Collect input variables from workflow
 API_key = os.getenv("INPUT_API_KEY") or "No key supplied"
-host_name = os.getenv("INPUT_HOST_NAME")
+host_name = os.getenv("INPUT_HOST_NAMES")
 project_name = os.getenv("INPUT_PROJECT_NAME") or "default"
 plan = os.getenv("INPUT_PLAN") or "default"
 facility = os.getenv("INPUT_FACILITY") or "default"
