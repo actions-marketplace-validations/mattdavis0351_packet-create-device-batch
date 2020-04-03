@@ -1,4 +1,4 @@
-name: "Create Packet Device"
+name: "Create Packet Device Batch"
 description: "Create a new device within a project on Packet.com"
 author: mattdavis0351
 
