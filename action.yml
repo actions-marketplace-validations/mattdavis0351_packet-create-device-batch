@@ -1,17 +1,14 @@
-# action.yml
 name: "Create Packet Device"
 description: "Create a new device within a project on Packet.com"
 author: mattdavis0351
 
 inputs:
-  API_key: # API key set under "Personal Settings on Packet.com"
+  API_key:
     description: "Packet.com API authorization token"
     required: true
-    # default: "No key supplied"
   project_name:
     description: "Name of project to create device in"
     required: true
-    # default: "default"
   host_names:
     description: "Comma separated list of desired host name for new device"
     required: true
@@ -19,15 +16,12 @@ inputs:
   plan:
     description: "Desired server type for device"
     required: true
-    # default: "default"
   facility:
     description: "Geographical location for device"
     required: true
-    # default: "default"
   operating_system:
     description: "Desired operating system for device"
     required: true
-    # default: "default"
   quantity:
     description: "Number of desired devices in batch"
     required: false
@@ -43,12 +37,6 @@ inputs:
   spot_price_max:
     description: "Maximum bid for spot instances"
     required: false
-
-# outputs:
-#   ip_addresses:
-#     description: "IP addresses of newly created device"
-#   device_id:
-#     description: "ID of the newly created device"
 
 runs:
   using: "docker"
